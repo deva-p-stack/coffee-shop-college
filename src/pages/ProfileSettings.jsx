@@ -35,7 +35,7 @@ export default function ProfileSettings() {
   const inputClass = darkMode 
     ? 'bg-gray-700 border-gray-600 text-gray-100 focus:border-amber-500' 
     : 'bg-white border-gray-300 text-gray-900 focus:border-amber-600';
-  const sectionClass = darkMode ? 'border-gray-700' : 'border-gray-200';
+  // const sectionClass = darkMode ? 'border-gray-700' : 'border-gray-200';
 
   return (
     <div className={`min-h-screen ${bgClass} transition-colors duration-300 p-4 md:p-8`}>

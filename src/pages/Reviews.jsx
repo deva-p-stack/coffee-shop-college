@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import { Star, ThumbsUp, MessageSquare, Filter, Search, Moon, Sun, Coffee, Calendar } from 'lucide-react';
+// import { useNavigate } from "react-router-dom";
 
-export default function Reviews() {
-  const [darkMode, setDarkMode] = useState(false);
+export default function Reviews({ darkMode, setDarkMode }) {
+ 
+
+
   const [searchTerm, setSearchTerm] = useState('');
   const [filterRating, setFilterRating] = useState('all');
   const [sortBy, setSortBy] = useState('recent');
+
+  
 
   const reviews = [
     {
@@ -232,7 +237,7 @@ export default function Reviews() {
             </div>
             <button
               onClick={() => setDarkMode(!darkMode)}
-              className={`p-3 rounded-full ${darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-200 hover:bg-gray-300'} transition-colors`}
+              className={`p-3 cursor-pointer rounded-full ${darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-200 hover:bg-gray-300'} transition-colors`}
             >
               {darkMode ? <Sun className="w-6 h-6 text-yellow-400" /> : <Moon className="w-6 h-6 text-gray-700" />}
             </button>

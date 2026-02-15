@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Moon, Sun, MapPin, Phone, Mail, Clock, Send, User, MessageSquare, Facebook, Instagram, Twitter, Check } from 'lucide-react';
 
-export default function ContactUs() {
-  const [darkMode, setDarkMode] = useState(false);
+export default function ContactUs({ darkMode, setDarkMode }) {
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',

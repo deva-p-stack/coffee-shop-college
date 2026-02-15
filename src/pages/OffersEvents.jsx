@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Moon, Sun, Percent, Music, Coffee, Calendar, Clock, MapPin, Tag, Gift, Users, Sparkles, Trophy, Heart, Star } from 'lucide-react';
 
-export default function OffersEvents() {
-  const [darkMode, setDarkMode] = useState(false);
+export default function OffersEvents({ darkMode, setDarkMode }) {
+
+
+
   const [activeTab, setActiveTab] = useState('all');
   const [selectedFilter, setSelectedFilter] = useState('all');
 
@@ -162,6 +164,38 @@ export default function OffersEvents() {
     }
   ];
 
+
+  const [email, setEmail] = useState("");
+const [error, setError] = useState("");
+const [success, setSuccess] = useState(false);
+
+
+const validateEmail = (value) => {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(value);
+};
+
+const handleSubscribe = () => {
+  if (!email) {
+    setError("Email is required");
+    return;
+  }
+
+  if (!validateEmail(email)) {
+    setError("Please enter a valid email address");
+    return;
+  }
+ // If valid
+setError("");
+setSuccess(true);
+setEmail("");
+
+setTimeout(() => {
+  setSuccess(false);
+}, 2000);
+};
+
+
   const allItems = [...offers, ...events];
 
   const filteredItems = allItems.filter(item => {
@@ -207,7 +241,7 @@ export default function OffersEvents() {
             </div>
             <button
               onClick={() => setDarkMode(!darkMode)}
-              className={`p-3 rounded-full ${darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-200 hover:bg-gray-300'} transition-colors`}
+              className={`p-3 cursor-pointer rounded-full ${darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-200 hover:bg-gray-300'} transition-colors`}
             >
               {darkMode ? <Sun className="w-6 h-6 text-yellow-400" /> : <Moon className="w-6 h-6 text-gray-700" />}
             </button>
@@ -409,26 +443,114 @@ export default function OffersEvents() {
           </div>
         )}
 
-        {/* Newsletter Signup */}
-        <div className={`${cardClass} rounded-lg shadow-lg p-8 mt-8`}>
-          <div className="flex items-center justify-between">
-            <div className="flex-1">
-              <h2 className={`text-2xl font-bold ${textClass} mb-2`}>Stay Updated!</h2>
-              <p className={subTextClass}>Subscribe to get notified about exclusive offers and upcoming events</p>
-            </div>
-            <div className="flex gap-3">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className={`px-4 py-3 border rounded-lg ${darkMode ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-white border-gray-300 text-gray-900'} focus:outline-none focus:ring-2 focus:ring-amber-500 w-64`}
-              />
-              <button className={`${darkMode ? 'bg-amber-600 hover:bg-amber-700' : 'bg-amber-500 hover:bg-amber-600'} text-white font-semibold px-6 py-3 rounded-lg transition-colors`}>
-                Subscribe
-              </button>
-            </div>
-          </div>
+    
+
+      {/* Newsletter Signup */}
+<div className={`${cardClass} relative overflow-hidden rounded-2xl shadow-xl p-8 md:p-12 mt-12`}>
+ 
+  {/* Soft Background Glow */}
+  <div className="absolute inset-0 bg-gradient-to-r from-amber-400/10 via-orange-400/10 to-amber-500/10 blur-2xl"></div>
+
+  <div className="relative flex flex-col md:flex-row items-center gap-8">
+    
+    {/* Left Content */}
+    <div className="flex-1 text-center md:text-left">
+      <h2 className={`text-3xl font-extrabold ${textClass} mb-3`}>
+        ☕ Stay Updated!
+      </h2>
+      <p className={`${subTextClass} max-w-md`}>
+        Subscribe to receive exclusive offers, new menu updates, and special
+        coffee events.
+      </p>
+    </div>
+
+    {/* Right Form */}
+ <div className="w-full md:w-auto flex flex-col gap-2 relative">
+
+  {/* Row */}
+  <div className="flex flex-col sm:flex-row gap-4 items-start">
+
+    {/* Input + Error Wrapper */}
+    <div className="flex flex-col w-full sm:w-72">
+
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => {
+          setEmail(e.target.value);
+          setError("");
+        }}
+        placeholder="Enter your email"
+        className={`px-6 py-4 rounded-full border
+        ${error ? "border-red-500 focus:ring-red-500" : "focus:ring-amber-500"}
+        ${darkMode
+          ? 'bg-gray-800 border-gray-700 text-gray-100 placeholder-gray-400'
+          : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'}
+        focus:outline-none focus:ring-2
+        transition-all duration-300 w-full`}
+      />
+
+      {/* Reserved error space */}
+      <div className="h-5 mt-2">
+        {error && (
+          <p className="text-red-500 text-sm ml-4">
+            {error}
+          </p>
+        )}
+      </div>
+
+    </div>
+
+    {/* Button */}
+    <button
+      onClick={handleSubscribe}
+      className={`px-8 py-4 rounded-full font-semibold text-white
+      transition-all duration-300 hover:scale-105 hover:-translate-y-1
+      ${darkMode
+        ? 'bg-amber-600 hover:bg-amber-700'
+        : 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600'}
+      shadow-lg whitespace-nowrap`}
+    >
+      Subscribe →
+    </button>
+
+  </div>
+
+  {/* Floating Success Message (NO layout shift) */}
+  {success && (
+    <div className="absolute -bottom-12 my-1.5 left-1/2 -translate-x-1/2
+    flex items-center gap-3
+    bg-green-500/30 text-white
+    px-6 py-3 rounded-lg
+    shadow-lg
+    animate-fadeIn z-50">
+
+      <div className="w-5 h-5 flex items-center justify-center
+      bg-white text-green-600 rounded-full text-sm font-bold">
+        ✓
+      </div>
+
+      <span className="text-sm font-medium">
+        Subscribed successfully!
+      </span>
+    </div>
+  )}
+
+</div>
+
+
+  </div>
+</div>
+
+
+
         </div>
       </div>
-    </div>
+    
+
+
+
+
+
   );
 }

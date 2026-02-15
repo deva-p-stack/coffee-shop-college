@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import { Moon, Sun, Coffee, Heart, Award, Leaf, Users, MapPin, Globe, Target, Sparkles, Clock } from 'lucide-react';
 
-export default function AboutUs() {
-  const [darkMode, setDarkMode] = useState(false);
+import { Moon, Sun, Coffee, Heart, Award, Leaf, Users, MapPin, Globe, Target, Sparkles, Clock } from 'lucide-react';
+import Navbar from "../components/Navbar";
+
+  export default function AboutUs({ darkMode, setDarkMode }) {
+  
 
   const team = [
     {

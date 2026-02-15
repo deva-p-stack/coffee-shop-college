@@ -1,12 +1,18 @@
 import { useState } from 'react';
-import { Coffee, Moon, Sun, Search, Heart, ShoppingCart } from 'lucide-react';
+import Navbar from "../components/Navbar";
+import Cart from "./Cart";
+import { useNavigate } from "react-router-dom";
+import { Coffee, Moon, Sun, Search, Heart, ShoppingCart, Check } from 'lucide-react';
 
-export default function CoffeeMenu() {
-  const [darkMode, setDarkMode] = useState(false);
+export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
+
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [favorites, setFavorites] = useState([]);
-  const [cart, setCart] = useState([]);
+  
+  const [toast, setToast] = useState(null);
+
 
   const menuItems = [
     { 
@@ -296,10 +302,39 @@ export default function CoffeeMenu() {
     );
   };
 
-  const addToCart = (item) => {
-    setCart(prev => [...prev, item]);
-    alert(`${item.name} added to cart!`);
-  };
+  // add to cart function
+const addToCart = (item) => {
+  setCart(prevCart => {
+    const existingItem = prevCart.find(cartItem => cartItem.id === item.id);
+
+    if (existingItem) {
+      // If item already in cart → increase quantity
+      return prevCart.map(cartItem =>
+        cartItem.id === item.id
+          ? { ...cartItem, quantity: cartItem.quantity + 1 }
+          : cartItem
+      );
+    } else {
+      // If new item → add with quantity 1
+      return [
+        ...prevCart,
+        {
+          id: item.id,
+          name: item.name,
+          image: item.image,
+          price: item.price,
+          quantity: 1
+        }
+      ];
+    }
+  });
+
+  setToast(`${item.name} added to cart`);
+
+  setTimeout(() => {
+    setToast(null);
+  }, 3000);
+};
 
   const bgClass = darkMode ? 'bg-gray-900' : 'bg-amber-50';
   const cardClass = darkMode ? 'bg-gray-800' : 'bg-white';
@@ -310,8 +345,9 @@ export default function CoffeeMenu() {
     : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500';
 
   return (
-    <div className={`min-h-screen ${bgClass} transition-colors duration-300 p-4 md:p-8`}>
-      <div className="max-w-7xl mx-auto">
+    <div className={`min-h-screen ${bgClass} transition-colors duration-300   `}>
+      
+      <div className="max-w-7xl mx-auto p-4 md:p-8 ">
         {/* Header */}
         <div className={`${cardClass} rounded-lg shadow-lg p-6 mb-6`}>
           <div className="flex items-center justify-between mb-6">
@@ -325,14 +361,20 @@ export default function CoffeeMenu() {
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <div className="relative">
-                <ShoppingCart className={`w-6 h-6 ${textClass}`} />
-                {cart.length > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                    {cart.length}
-                  </span>
-                )}
-              </div>
+              {/* added to cart item */}
+              
+             <div className="relative cursor-pointer" onClick={() => navigate("/cart")} >
+              <ShoppingCart className={`w-6 h-6 ${textClass}`} />
+               {cart.length > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+              {cart.length}
+               </span>
+              )}
+            </div>
+
+
+
+              {/* dark mode and the light mode  */}
               <button
                 onClick={() => setDarkMode(!darkMode)}
                 className={`p-3 rounded-full ${darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-200 hover:bg-gray-300'} transition-colors`}
@@ -354,6 +396,26 @@ export default function CoffeeMenu() {
             />
           </div>
         </div>
+        {/* product add to cart pop message  */}
+        {toast && (
+         <div className="fixed top-25 right-5 z-50 animate-slideIn">
+          <div className="flex items-center bg-white dark:bg-gray-800 shadow-xl rounded-lg overflow-hidden w-80">
+      
+              {/* Left Green Bar */}
+                <div className="bg-green-500 w-2 h-full"></div>
+
+             {/* Content */}
+                      <div className="flex items-center gap-3 p-4">
+                      <div className="bg-green-500 p-2 rounded-full">
+                      <Check className="w-5 h-5 text-white" />
+                         </div>
+                            <p className="text-gray-800 dark:text-gray-100 font-semibold">
+                            {toast}
+                          </p>
+                        </div>
+                             </div>
+                        </div>
+                      )}
 
         {/* Category Filter */}
         <div className="flex gap-3 mb-6 overflow-x-auto pb-2">
@@ -452,5 +514,6 @@ export default function CoffeeMenu() {
         )}
       </div>
     </div>
+        
   );
 }

@@ -1,145 +1,155 @@
-import { useState } from 'react';
-import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Twitter, Youtube, Linkedin, Coffee, Heart, Sun, Moon } from 'lucide-react';
 
-export default function Footer() {
-  const [darkMode, setDarkMode] = useState(false);
+import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Twitter, Youtube, Linkedin, Coffee, Heart } from 'lucide-react';
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
-  const bgClass = darkMode ? 'bg-[#FFFBEB]' : 'bg-[#101828]';
-  const textClass = darkMode ? 'text-gray-900' : 'text-gray-300';
-  const headingClass = darkMode ? 'text-gray-900' : 'text-white';
-  const linkHoverClass = darkMode ? 'hover:text-gray-400' : 'hover:text-amber-400';
-  const borderClass = darkMode ? 'border-gray-500' : 'border-gray-700';
-  const inputBgClass = darkMode ? 'bg-gray-200' : 'bg-gray-700';
-  const socialBgClass = darkMode ? 'bg-gray-300' : 'bg-gray-700';
-  const bottomBarBgClass = darkMode ? 'bg-gray-100' : 'bg-gray-900';
-  
+
+
+export default function Footer({ darkMode }) {
+
+  const [email, setEmail] = useState("");
+const [error, setError] = useState("");
+const [success, setSuccess] = useState(false);
+
+const validateEmail = (value) => {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(value);
+};
+
+
+const handleSubscribe = () => {
+  if (!email) {
+    setError("Email is required");
+    return;
+  }
+
+  if (!validateEmail(email)) {
+    setError("Please enter a valid email address");
+    return;
+  }
+
+  // If valid
+setError("");
+setSuccess(true);
+setEmail("");
+
+setTimeout(() => {
+  setSuccess(false);
+}, 2000);
+};
+
+
+
+
+
+  const bgClass = darkMode ? 'bg-[#101828]' : 'bg-[#FFFBEB]';
+const textClass = darkMode ? 'text-gray-300' : 'text-gray-900';
+const headingClass = darkMode ? 'text-white' : 'text-gray-900';
+const linkHoverClass = darkMode ? 'hover:text-amber-400' : 'hover:text-gray-600';
+const borderClass = darkMode ? 'border-gray-700' : 'border-gray-300';
+const inputBgClass = darkMode 
+  ? 'bg-gray-700 text-white placeholder-gray-400' 
+  : 'bg-gray-200 text-gray-900 placeholder-gray-500';
+const socialBgClass = darkMode ? 'bg-gray-700' : 'bg-gray-300';
+const bottomBarBgClass = darkMode ? 'bg-gray-900' : 'bg-gray-100';
+
+
+const now = new Date();
+const day = now.getDay(); // 0 = Sunday
+const hour = now.getHours();
+
+let isOpen = false;
+
+if (day >= 1 && day <= 5) {
+  isOpen = hour >= 7 && hour < 22; // Mon–Fri
+} else {
+  isOpen = hour >= 8 && hour < 23; // Sat & Sun
+}
+
+
   return (
-    <footer className={`${bgClass} transition-colors duration-300 relative shadow-lg`}>
-      {/* Dark Mode Toggle - Top Right */}
-      <div className="absolute top-6 right-6 z-10">
-        <button
-          onClick={() => setDarkMode(!darkMode)}
-          className={`${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-700 hover:bg-gray-600'} p-3 rounded-full shadow-lg transition-all duration-300 border-2 ${darkMode ? 'border-amber-500' : 'border-gray-600'}`}
-          aria-label="Toggle dark mode"
-        >
-          {darkMode ? (
-            <Sun className="w-6 h-6 text-amber-500" />
-          ) : (
-            <Moon className="w-6 h-6 text-gray-300" />
-          )}
-        </button>
-      </div>
+   <footer className={`${bgClass} transition-all duration-500 relative overflow-hidden`}>
 
-            <hr className='text-gray-300' />  
+           {/* Soft Top Glow */}
+<div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[250px] bg-amber-500/10 blur-3xl rounded-full pointer-events-none"></div>
+
+      
+
+
       {/* Main Footer Content */}
-      <div className="max-w-7xl mx-auto px-4 py-12">
+      <div className="relative max-w-7xl mx-auto px-6 py-24">
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           
           {/* About Section */}
           <div>
+
             <div className="flex items-center gap-2 mb-4">
               <Coffee className="w-8 h-8 text-amber-500" />
               <h3 className={`text-2xl font-bold ${headingClass}`}>Coffee Shop</h3>
             </div>
+            
             <p className={`${textClass} mb-4 leading-relaxed`}>
               Brewing happiness since 2015. We serve premium coffee with passion and dedication to our community.
             </p>
-            <div className="flex gap-3">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${socialBgClass} p-3 rounded-full ${linkHoverClass} transition-colors`}
-                aria-label="Facebook"
-              >
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${socialBgClass} p-3 rounded-full ${linkHoverClass} transition-colors`}
-                aria-label="Instagram"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${socialBgClass} p-3 rounded-full ${linkHoverClass} transition-colors`}
-                aria-label="Twitter"
-              >
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${socialBgClass} p-3 rounded-full ${linkHoverClass} transition-colors`}
-                aria-label="YouTube"
-              >
-                <Youtube className="w-5 h-5" />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${socialBgClass} p-3 rounded-full ${linkHoverClass} transition-colors`}
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-            </div>
+ 
+ <div className="flex gap-3 mt-5">
+  {[Facebook, Instagram, Twitter, Youtube, Linkedin].map((Icon, i) => (
+    <a
+      key={i}
+      href="#"
+      className={`p-3 rounded-full ${socialBgClass}
+      border ${borderClass}
+      hover:bg-amber-500 hover:text-white hover:border-amber-500
+      transition-all duration-300
+      hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(251,191,36,0.6)]`}
+    >
+      <Icon className="w-5 h-5" />
+    </a>
+  ))}
+</div>
           </div>
 
           {/* Quick Links */}
           <div>
             <h3 className={`text-lg font-bold ${headingClass} mb-4`}>Quick Links</h3>
-            <ul className="space-y-3">
-              <li>
-                <a href="#menu" className={`${textClass} ${linkHoverClass} transition-colors flex items-center gap-2`}>
-                  <span className="w-1.5 h-1.5 bg-amber-500 rounded-full"></span>
-                  Our Menu
-                </a>
-              </li>
-              <li>
-                <a href="#about" className={`${textClass} ${linkHoverClass} transition-colors flex items-center gap-2`}>
-                  <span className="w-1.5 h-1.5 bg-amber-500 rounded-full"></span>
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="#offers" className={`${textClass} ${linkHoverClass} transition-colors flex items-center gap-2`}>
-                  <span className="w-1.5 h-1.5 bg-amber-500 rounded-full"></span>
-                  Offers & Events
-                </a>
-              </li>
-              <li>
-                <a href="#reviews" className={`${textClass} ${linkHoverClass} transition-colors flex items-center gap-2`}>
-                  <span className="w-1.5 h-1.5 bg-amber-500 rounded-full"></span>
-                  Reviews
-                </a>
-              </li>
-              <li>
-                <a href="#faq" className={`${textClass} ${linkHoverClass} transition-colors flex items-center gap-2`}>
-                  <span className="w-1.5 h-1.5 bg-amber-500 rounded-full"></span>
-                  FAQ
-                </a>
-              </li>
-              <li>
-                <a href="#contact" className={`${textClass} ${linkHoverClass} transition-colors flex items-center gap-2`}>
-                  <span className="w-1.5 h-1.5 bg-amber-500 rounded-full"></span>
-                  Contact Us
-                </a>
-              </li>
-            </ul>
+            
+            
+<ul className="space-y-3">
+  {[
+    { name: "Our Menu", path: "/menu" },
+    { name: "About Us", path: "/about" },
+    { name: "Offers & Events", path: "/offers" },
+    { name: "Reviews", path: "/reviews" },
+    { name: "FAQ", path: "/faq" },
+    { name: "Contact Us", path: "/contact" },
+  ].map((item, i) => (
+    <li
+      className="flex items-start gap-3 group transition-all duration-300 hover:translate-x-1"
+      key={i}
+    >
+      <Link
+        to={item.path}
+        className={`${textClass} flex items-center gap-2 group transition-all duration-300`}
+      >
+        <span className="w-1.5 h-1.5 bg-amber-500 rounded-full group-hover:scale-125 transition"></span>
+        <span className="group-hover:translate-x-1 transition">
+          {item.name}
+        </span>
+      </Link>
+    </li>
+  ))}
+</ul>
+
+
+
+
+
           </div>
 
           {/* Contact Info */}
           <div>
-            <h3 className={`text-lg font-bold ${headingClass} mb-4`}>Contact Info</h3>
+           <h3 className={`text-lg font-semibold tracking-wide ${headingClass} mb-6`}>Contact Info</h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin className={`w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5`} />
@@ -172,81 +182,210 @@ export default function Footer() {
               </li>
             </ul>
           </div>
+          
 
           {/* Opening Hours */}
-          <div>
-            <h3 className={`text-lg font-bold ${headingClass} mb-4 flex items-center gap-2`}>
-              <Clock className="w-5 h-5 text-amber-500" />
-              Opening Hours
-            </h3>
-            <ul className="space-y-3">
-              <li className="flex justify-between items-center">
-                <span className={textClass}>Monday - Friday</span>
-                <span className="text-amber-500 font-semibold">7 AM - 10 PM</span>
-              </li>
-              <li className="flex justify-between items-center">
-                <span className={textClass}>Saturday</span>
-                <span className="text-amber-500 font-semibold">8 AM - 11 PM</span>
-              </li>
-              <li className="flex justify-between items-center">
-                <span className={textClass}>Sunday</span>
-                <span className="text-amber-500 font-semibold">8 AM - 11 PM</span>
-              </li>
-              <li className={`pt-3 border-t ${borderClass}`}>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                  <span className="text-green-400 font-semibold">Open Now</span>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
+          <div className={`p-6 rounded-xl 
+dark:bg-slate-500/10
+  dark:from-[#1f1b16]/80 dark:to-[#2a241c]/70
+backdrop-blur-xl border ${borderClass} shadow-lg`}>
+
+
+  <h3 className={`text-lg font-bold ${headingClass} mb-5 flex items-center gap-2`}>
+    <Clock className="w-5 h-5 text-amber-500" />
+    Opening Hours
+  </h3>
+
+<div className="space-y-3 text-sm">
+  <div className="flex justify-between   transition-all duration-300 hover:translate-x-2  ">
+    <span className={textClass}>Mon - Fri</span>
+    <span className="text-amber-500 font-semibold ">7 AM - 10 PM</span>
+  </div>
+
+  <div className="flex justify-between   transition-all duration-300 hover:translate-x-2">
+    <span className={textClass}>Saturday</span>
+    <span className="text-amber-500 font-semibold">8 AM - 11 PM</span>
+  </div>
+
+  <div className="flex justify-between   transition-all duration-300 hover:translate-x-2 ">
+    <span className={textClass}>Sunday</span>
+    <span className="text-amber-500 font-semibold ">8 AM - 11 PM</span>
+  </div>
+</div>
+  
+ <div className={`mt-8 flex justify-end items-center gap-2 text-sm font-semibold
+  ${isOpen ? "text-green-500" : "text-red-500"}`}
+>
+  <div
+    className={`w-2.5 h-2.5 rounded-full animate-pulse
+    ${isOpen ? "bg-green-500" : "bg-red-500"}`}
+  ></div>
+
+  {isOpen ? "Open Now" : "Closed"}
+</div>
+</div> {/* END grid */}
+
+    </div> {/* END grid */}
+
+      </div> {/* END main footer content */}
+
 
         {/* Newsletter Section */}
-        <div className={`mt-12 pt-8 border-t  ${borderClass}`}>
-          <div className="max-w-2xl mx-auto text-center">
-            <h3 className={`text-xl font-bold ${headingClass} mb-3`}>Subscribe to Our Newsletter</h3>
-            <p className={`${textClass} mb-6`}>Get exclusive offers and updates delivered to your inbox</p>
-            <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className={`flex-1 px-4 py-3 rounded-lg ${inputBgClass} text-gray-500  border ${borderClass} focus:outline-none focus:ring-2 focus:ring-amber-500 placeholder-gray-400`}
-              />
-              <button className="bg-amber-600 hover:bg-amber-500 text-white  font-semibold px-6 py-3 rounded-lg transition-colors">
-                Subscribe
-              </button>
-            </div>
-          </div>
-        </div>
+        <div className="mb-20 relative">
+
+          {/* this pop message continer  */}
+
+{/* Success Message */}
+
+  {/* Soft Gradient Background */}
+  <div className="absolute inset-0 bg-gradient-to-r from-amber-400/10 via-orange-400/10 to-amber-500/10 blur-3xl rounded-3xl"></div>
+
+<div
+  className={`relative max-w-3xl mx-auto px-10 py-14 rounded-3xl
+  shadow-xl border ${borderClass}
+
+  dark:bg-slate-500/10
+  dark:from-[#1f1b16]/80 dark:to-[#2a241c]/70
+  backdrop-blur-xl
+  dark:shadow-[0_0_40px_rgba(251,191,36,0.08)]`}
+>
+
+    {/* Heading */}
+    <div className="text-center mb-10">
+      <h3 className={`text-2xl md:text-4xl font-extrabold ${headingClass} mb-3`}>
+        ☕ Join Our Coffee Community
+      </h3>
+      <p className={`text-sm ${textClass}`}>
+        Be the first to know about new brews, exclusive offers & special events.
+      </p>
+    </div>
+
+    {/* Form */}
+{/* Form Wrapper */}
+<div className="max-w-xl mx-auto w-full">
+
+  {/* Row */}
+  <div className="flex flex-col md:flex-row items-center gap-4">
+
+    <input
+      type="email"
+      value={email}
+      onChange={(e) => {
+        setEmail(e.target.value);
+        setError("");
+      }}
+      placeholder="Enter your email address"
+      className={`flex-1 h-[56px] px-6 rounded-full
+      ${inputBgClass}
+      border ${error ? "border-red-500" : borderClass}
+      focus:outline-none focus:ring-2
+      ${error ? "focus:ring-red-500" : "focus:ring-amber-500"}
+      transition-all duration-300`}
+    />
+
+    <button
+      onClick={handleSubscribe}
+      className="w-full md:w-auto h-[56px] px-8 rounded-full
+      bg-gradient-to-r from-amber-500 to-orange-500
+      hover:from-amber-600 hover:to-orange-600
+      text-white font-semibold
+      transition-all duration-300
+      hover:-translate-y-1 hover:scale-105
+      whitespace-nowrap cursor-pointer"
+    >
+      Subscribe Now →
+    </button>
+
+    
+
+  </div>
+
+  {/* Error BELOW row (not inside flex row) */}
+  {error && (
+    <p className="text-red-500 text-sm mt-2 ml-4">
+      {error}
+    </p>
+  )}
+
+  {/* email successfull message  */}
+  {success && (
+  <div className="mt-4 w-[40%] flex justify-center mx-auto my-4  items-center gap-3 bg-green-100/10 dark:bg-green-900/40 
+  border border-green-400/10 text-green-700 dark:text-green-300/50 
+  px-4 py-3 rounded-lg animate-fadeIn">
+
+    {/* Green Check Icon */}
+    <div className="w-5 h-5 flex items-center justify-center 
+    bg-green-500/50 text-white rounded-full text-sm font-bold">
+      ✓
+    </div>
+
+    <span className="text-sm font-medium">
+      Subscribed successfully!
+    </span>
+  </div>
+)}
+
+
+</div>
+
+    {/* Small Trust Text */}
+    <p className={`text-sm text-center mt-6 ${textClass} opacity-70`}>
+      No spam. Unsubscribe anytime.
+    </p>
+
+  </div>
+</div>
+
+
+  {/* Bottom Bar */}
+{/* Bottom Bar */}
+<div className={`border-t ${borderClass} ${bottomBarBgClass}`}>
+  <div className="max-w-7xl mx-auto px-6 py-10">
+
+    <div className="grid md:grid-cols-3 items-center gap-6 text-center md:text-left">
+
+      {/* Left - Copyright */}
+      <div>
+        <p className={`${textClass} text-sm opacity-80`}>
+          © {new Date().getFullYear()}{" "}
+          <span className="font-semibold tracking-wide transition-all ease-in-out duration-300 hover:text-amber-500 hover:drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]">
+  Bean Haven
+</span>.
+          All rights reserved.
+        </p>
       </div>
 
-      {/* Bottom Bar */}
-      <div className={`border-t ${borderClass} ${bottomBarBgClass}`}>
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className={`${textClass} text-sm text-center md:text-left`}>
-              © {new Date().getFullYear()} Coffee Shop. All rights reserved.
-            </p>
-            <div className="flex items-center gap-1 text-sm">
-              <span className={textClass}>Made with</span>
-              <Heart className="w-4 h-4 text-red-500 fill-red-500" />
-              <span className={textClass}>for coffee lovers</span>
-            </div>
-            <div className="flex gap-6 text-sm">
-              <a href="#privacy" className={`${textClass} ${linkHoverClass} transition-colors`}>
-                Privacy Policy
-              </a>
-              <a href="#terms" className={`${textClass} ${linkHoverClass} transition-colors`}>
-                Terms of Service
-              </a>
-              <a href="#cookies" className={`${textClass} ${linkHoverClass} transition-colors`}>
-                Cookie Policy
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Center */}
+     <div className="flex items-center justify-center gap-2 text-sm">
+  <span className={`${textClass} opacity-80`}>Crafted with</span>
+  <Heart className="w-4 h-4 text-red-500 fill-red-500 animate-pulse" />
+  <span className={`${textClass} opacity-80`}>
+    for coffee lovers
+  </span>
+</div>
+
+      {/* Right - Links */}
+    <div className="flex flex-wrap justify-center md:justify-end gap-6 text-sm">
+  {["Privacy Policy", "Terms of Service", "Cookie Policy"].map((item, index) => (
+    <a
+      key={index}
+      href={`#${item.toLowerCase().replace(/\s/g, "")}`}
+      className={`${textClass} opacity-80 hover:opacity-100 transition-all duration-300 ease-in-out relative group`}
+    >
+      {item}
+
+      {/* Animated Underline */}
+      <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-amber-500 transition-all duration-300 group-hover:w-full"></span>
+    </a>
+  ))}
+</div>
+
+    </div>
+
+  </div>
+</div>
+
+
+
     </footer>
-  );
-}
+  );}

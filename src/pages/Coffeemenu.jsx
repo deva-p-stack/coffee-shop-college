@@ -2,6 +2,8 @@ import { useState } from 'react';
 import Navbar from "../components/Navbar";
 import Cart from "./Cart";
 import { useNavigate } from "react-router-dom";
+
+
 import { Coffee, Moon, Sun, Search, Heart, ShoppingCart, Check } from 'lucide-react';
 
 export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
@@ -31,7 +33,9 @@ export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
       price: 140, 
       description: 'Espresso with hot water', 
       ingredients: 'Espresso, Hot water',
-      image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400&h=300&fit=crop'
+        image: "/coffee-shop-college/images/Americano.jpg"
+
+
     },
     { 
       id: 3, 
@@ -58,7 +62,8 @@ export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
       price: 190, 
       description: 'Espresso with chocolate and steamed milk', 
       ingredients: 'Espresso, Chocolate, Steamed milk, Whipped cream',
-      image: 'https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?w=400&h=300&fit=crop'
+       image: "/coffee-shop-college/images/mocha.jpg"
+
     },
     { 
       id: 6, 
@@ -67,7 +72,7 @@ export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
       price: 200, 
       description: 'Vanilla, steamed milk, espresso, and caramel', 
       ingredients: 'Vanilla syrup, Steamed milk, Espresso, Caramel drizzle',
-      image: 'https://images.unsplash.com/photo-1599639957043-f3aa5c986398?w=400&h=300&fit=crop'
+      image: "/coffee-shop-college/images/Caramel Macchiato.png"
     },
     { 
       id: 7, 
@@ -76,7 +81,7 @@ export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
       price: 170, 
       description: 'Espresso with microfoam milk', 
       ingredients: 'Espresso, Microfoam milk',
-      image: 'https://images.unsplash.com/photo-1606312619070-d48b4cbc3fb1?w=400&h=300&fit=crop'
+      image: "/coffee-shop-college/images//Flat White.png"
     },
     { 
       id: 8, 
@@ -94,7 +99,7 @@ export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
       price: 145, 
       description: 'Equal parts espresso and steamed milk', 
       ingredients: 'Espresso, Steamed milk',
-      image: 'https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=400&h=300&fit=crop'
+           image: "/coffee-shop-college/images/Cortado.png"
     },
     { 
       id: 10, 
@@ -103,7 +108,7 @@ export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
       price: 180, 
       description: 'Espresso topped with whipped cream', 
       ingredients: 'Espresso, Whipped cream, Chocolate shavings',
-      image: 'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&h=300&fit=crop'
+             image: "/coffee-shop-college/images/Vienna Coffee.jpg"
     },
     { 
       id: 11, 
@@ -112,7 +117,7 @@ export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
       price: 150, 
       description: 'Chilled brewed coffee over ice', 
       ingredients: 'Brewed coffee, Ice, Milk (optional)',
-      image: 'https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=400&h=300&fit=crop'
+         image: "/coffee-shop-college/images/Iced Coffee.jpg"
     },
     { 
       id: 12, 
@@ -121,7 +126,7 @@ export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
       price: 160, 
       description: 'Smooth cold-steeped coffee', 
       ingredients: 'Cold brew concentrate, Water, Ice',
-      image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop'
+      image: "/coffee-shop-college/images/Cold Brew.png"
     },
     { 
       id: 13, 
@@ -130,7 +135,7 @@ export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
       price: 180, 
       description: 'Espresso with cold milk and ice', 
       ingredients: 'Espresso, Cold milk, Ice',
-      image: 'https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=400&h=300&fit=crop'
+       image: "/coffee-shop-college/images/Iced Latte.jpg"
     },
     { 
       id: 14, 
@@ -139,7 +144,7 @@ export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
       price: 200, 
       description: 'Iced espresso with chocolate', 
       ingredients: 'Espresso, Chocolate, Cold milk, Ice, Whipped cream',
-      image: 'https://images.unsplash.com/photo-1578374173705-0ba7d4bb0c02?w=400&h=300&fit=crop'
+      image: "/coffee-shop-college/images/Iced Mocha.jpg" 
     },
     { 
       id: 15, 
@@ -148,7 +153,7 @@ export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
       price: 220, 
       description: 'Blended coffee with ice and cream', 
       ingredients: 'Coffee, Ice, Milk, Sugar, Whipped cream',
-      image: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400&h=300&fit=crop'
+      image: "/coffee-shop-college/images/Frappuccino.jpg"
     },
     { 
       id: 16, 
@@ -157,7 +162,7 @@ export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
       price: 155, 
       description: 'Espresso with cold water and ice', 
       ingredients: 'Espresso, Cold water, Ice',
-      image: 'https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=400&h=300&fit=crop'
+       image: "/coffee-shop-college/images/Iced Americano.jpg"
     },
     { 
       id: 17, 
@@ -166,7 +171,7 @@ export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
       price: 190, 
       description: 'Cold brew infused with nitrogen', 
       ingredients: 'Cold brew, Nitrogen gas',
-      image: 'https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?w=400&h=300&fit=crop'
+        image: "/coffee-shop-college/images/Nitro Cold Brew.jpg"
     },
     { 
       id: 18, 
@@ -175,7 +180,7 @@ export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
       price: 185, 
       description: 'Latte with vanilla syrup', 
       ingredients: 'Espresso, Vanilla syrup, Steamed milk',
-      image: 'https://images.unsplash.com/photo-1599639957043-f3aa5c986398?w=400&h=300&fit=crop'
+      image: "/coffee-shop-college/images/Vanilla Latte.jpg"
     },
     { 
       id: 19, 
@@ -184,7 +189,7 @@ export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
       price: 185, 
       description: 'Latte with hazelnut flavor', 
       ingredients: 'Espresso, Hazelnut syrup, Steamed milk',
-      image: 'https://images.unsplash.com/photo-1611162458324-aae1eb4129a4?w=400&h=300&fit=crop'
+          image: "/coffee-shop-college/images/Hazelnut Latte.jpg"
     },
     { 
       id: 20, 
@@ -193,7 +198,7 @@ export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
       price: 210, 
       description: 'Seasonal favorite with pumpkin spice', 
       ingredients: 'Espresso, Pumpkin spice, Steamed milk, Whipped cream',
-      image: 'https://images.unsplash.com/photo-1635350736475-c8cef4b21906?w=400&h=300&fit=crop'
+      image: "/coffee-shop-college/images/Pumpkin Spice Latte.jpg"
     },
     { 
       id: 21, 
@@ -202,7 +207,7 @@ export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
       price: 230, 
       description: 'Espresso poured over vanilla ice cream', 
       ingredients: 'Espresso, Vanilla ice cream',
-      image: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?w=400&h=300&fit=crop'
+      image: "/coffee-shop-college/images/Affogato.jpg"
     },
     { 
       id: 22, 
@@ -211,7 +216,8 @@ export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
       price: 250, 
       description: 'Coffee with Irish whiskey and cream', 
       ingredients: 'Coffee, Irish whiskey, Brown sugar, Cream',
-      image: 'https://images.unsplash.com/photo-1514066558159-fc8c737ef259?w=400&h=300&fit=crop'
+     image: "/coffee-shop-college/images/Irish Coffee.jpg"
+      
     },
     { 
       id: 23, 
@@ -220,7 +226,7 @@ export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
       price: 175, 
       description: 'Whipped coffee over milk', 
       ingredients: 'Instant coffee, Sugar, Hot water, Milk',
-      image: 'https://images.unsplash.com/photo-1606312619070-d48b4cbc3fb1?w=400&h=300&fit=crop'
+          image: "/coffee-shop-college/images/Dalgona Coffee.jpg"
     },
     { 
       id: 24, 
@@ -229,7 +235,8 @@ export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
       price: 205, 
       description: 'Mocha with white chocolate', 
       ingredients: 'Espresso, White chocolate, Steamed milk, Whipped cream',
-      image: 'https://images.unsplash.com/photo-1578374173705-0ba7d4bb0c02?w=400&h=300&fit=crop'
+      
+      image: "/coffee-shop-college/images/White Chocolate Mocha.jpg"
     },
     { 
       id: 25, 
@@ -238,7 +245,8 @@ export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
       price: 195, 
       description: 'Latte with salted caramel', 
       ingredients: 'Espresso, Salted caramel, Steamed milk',
-      image: 'https://images.unsplash.com/photo-1599639957043-f3aa5c986398?w=400&h=300&fit=crop'
+     
+     image: "/coffee-shop-college/images/Salted Caramel Latte.jpg"
     },
     { 
       id: 26, 
@@ -247,7 +255,8 @@ export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
       price: 195, 
       description: 'Japanese green tea latte', 
       ingredients: 'Matcha powder, Steamed milk, Sugar',
-      image: 'https://images.unsplash.com/photo-1536013992403-fcdee92960c3?w=400&h=300&fit=crop'
+     
+       image: "/coffee-shop-college/images/Matcha Latte.jpg"
     },
     { 
       id: 27, 
@@ -265,7 +274,10 @@ export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
       price: 175, 
       description: 'Spiced tea with steamed milk', 
       ingredients: 'Chai tea, Spices, Steamed milk, Honey',
-      image: 'https://images.unsplash.com/photo-1578899952107-9d0d3a31e1f8?w=400&h=300&fit=crop'
+      
+
+      
+       image: "/coffee-shop-college/images/Chai Latte.jpg"
     },
     { 
       id: 29, 
@@ -274,7 +286,10 @@ export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
       price: 165, 
       description: 'Earl Grey tea latte with vanilla', 
       ingredients: 'Earl Grey tea, Vanilla, Steamed milk',
-      image: 'https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?w=400&h=300&fit=crop'
+   
+      
+       image: "/coffee-shop-college/images/London Fog.jpg"
+      
     },
     { 
       id: 30, 

@@ -242,7 +242,7 @@ useEffect(() => {
         Experience the aroma, taste the passion.
       </p>
 
-      <div className="flex flex-wrap gap-4 pt-4">
+    <div className="flex flex-col sm:flex-row gap-4 pt-4  w-full sm:w-auto sm:justify-start">
 
         <button
           onClick={() => navigate("/menu")}
@@ -271,7 +271,7 @@ useEffect(() => {
 
         <button
           onClick={() => navigate("/contact")}
-          className="border border-white/60
+          className="border border-white/60 
                      px-8 py-3 rounded-full
                      font-semibold
                      text-white
@@ -286,7 +286,7 @@ useEffect(() => {
   </div>
 
   {/* Scroll Indicator */}
-  <div className="absolute bottom-10 left-1/2 -translate-x-1/2">
+  <div className="absolute bottom-6 left-1/2 -translate-x-1/2 ">
     <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center">
       <div className="w-1 h-3 bg-white mt-2 rounded-full animate-bounce" />
     </div>
@@ -294,48 +294,58 @@ useEffect(() => {
 
 </section>
 
- {/* Opening Hours & Location */}
-<section className="relative max-w-6xl mx-auto px-6 md:px-10 mt-28">
-  <div className="grid md:grid-cols-2 gap-12">
+{/* Opening Hours & Location */}
+<section className="relative max-w-7xl mx-auto px-5 sm:px-8 md:px-12 lg:px-16 mt-20 md:mt-28">
+  
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
 
-    {/* Opening Hours */}
+    {/* ================= Opening Hours Card ================= */}
     <div
       className={`
         ${t.card}
-        relative rounded-3xl p-8
+        relative
+        rounded-2xl sm:rounded-3xl
+        p-6 sm:p-8 lg:p-10
         border ${t.border}
-        bg-white/60 dark:bg-white/5
-        backdrop-blur-xl
-        shadow-lg
+        bg-white/70 dark:bg-white/5
+        backdrop-blur-2xl
+        shadow-md sm:shadow-lg
         transition-all duration-500
-        hover:shadow-2xl hover:-translate-y-2
+        lg:hover:shadow-2xl lg:hover:-translate-y-2
       `}
     >
-      {/* Floating Status Badge */}
-      <div className="absolute top-12 right-6">
-      <span
-  className={`
-    px-5 py-2 text-xs font-bold tracking-wide rounded-full shadow-md
-    ${isOpen
-      ? "bg-green-500 text-white"
-      : "bg-red-500 text-white"}
-  `}
->
-  {isOpen ? `OPEN • ${timeLeft}` : "CLOSED"}
-</span>
-          
+
+      {/* Responsive Status Badge */}
+      <div className="absolute top-4 right-4 sm:top-6 sm:right-6">
+        <span
+          className={`
+            px-3 sm:px-4
+            py-1.5
+            text-[10px] sm:text-xs
+            font-semibold tracking-wide
+            rounded-full
+            shadow-md
+            whitespace-nowrap
+            ${isOpen ? "bg-green-500 text-white" : "bg-red-500 text-white"}
+          `}
+        >
+          {isOpen ? `OPEN • ${timeLeft}` : "CLOSED"}
+        </span>
       </div>
 
-      <div className="flex items-center gap-4 mb-8">
-        <div className={`${t.iconAccent} p-4 rounded-2xl shadow-lg`}>
-          <Clock className="w-6 h-6 text-white" />
+      {/* Header */}
+      <div className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
+        <div className={`${t.iconAccent} p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-lg`}>
+          <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
         </div>
-        <h3 className={`text-3xl font-bold ${t.text}`}>
+
+        <h3 className={`text-xl sm:text-2xl lg:text-3xl font-bold ${t.text}`}>
           Opening Hours
         </h3>
       </div>
 
-      <div className="space-y-5">
+      {/* Hours List */}
+      <div className="space-y-4 sm:space-y-5">
         {[
           { day: "Monday - Friday", time: "7:00 AM - 10:00 PM" },
           { day: "Saturday", time: "8:00 AM - 11:00 PM" },
@@ -343,13 +353,13 @@ useEffect(() => {
         ].map((item, index) => (
           <div
             key={index}
-            className="flex justify-between items-center group"
+            className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 group"
           >
-            <span className={`text-base font-medium ${t.text}`}>
+            <span className={`text-sm sm:text-base font-medium ${t.text}`}>
               {item.day}
             </span>
 
-            <span className="text-sm font-semibold text-amber-500 group-hover:translate-x-1 transition">
+            <span className="text-xs sm:text-sm font-semibold text-amber-500 group-hover:translate-x-1 transition">
               {item.time}
             </span>
           </div>
@@ -357,31 +367,37 @@ useEffect(() => {
       </div>
     </div>
 
-    {/* Location */}
+    {/* ================= Location Card ================= */}
     <div
       className={`
         ${t.card}
-        relative rounded-3xl p-8
+        relative
+        rounded-2xl sm:rounded-3xl
+        p-6 sm:p-8 lg:p-10
         border ${t.border}
-        bg-white/60 dark:bg-white/5
-        backdrop-blur-xl
-        shadow-lg
+        bg-white/70 dark:bg-white/5
+        backdrop-blur-2xl
+        shadow-md sm:shadow-lg
         transition-all duration-500
-        hover:shadow-2xl hover:-translate-y-2
+        lg:hover:shadow-2xl lg:hover:-translate-y-2
       `}
     >
-      <div className="flex items-center gap-4 mb-8">
-        <div className={`${t.iconAccent} p-4 rounded-2xl shadow-lg`}>
-          <MapPin className="w-6 h-6 text-white" />
+
+      {/* Header */}
+      <div className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
+        <div className={`${t.iconAccent} p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-lg`}>
+          <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
         </div>
-        <h3 className={`text-3xl font-bold ${t.text}`}>
+
+        <h3 className={`text-xl sm:text-2xl lg:text-3xl font-bold ${t.text}`}>
           Visit Our Café
         </h3>
       </div>
 
       <div className="space-y-6">
+
         <div>
-          <p className={`text-lg font-semibold ${t.text}`}>
+          <p className={`text-base sm:text-lg font-semibold ${t.text}`}>
             123 Coffee Street
           </p>
           <p className={`${t.subText} text-sm mt-1`}>
@@ -408,15 +424,17 @@ useEffect(() => {
         </div>
 
         <button
-          className="w-full mt-6 py-3 rounded-2xl
+          className="w-full mt-6 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl
                      bg-gradient-to-r from-amber-500 to-orange-500
                      hover:from-amber-600 hover:to-orange-600
                      text-white font-semibold
                      shadow-lg hover:shadow-xl
-                     transition-all duration-300"
+                     transition-all duration-300
+                     active:scale-95"
         >
           Get Directions
         </button>
+
       </div>
     </div>
 

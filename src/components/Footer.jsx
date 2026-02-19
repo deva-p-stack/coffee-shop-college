@@ -230,111 +230,114 @@ backdrop-blur-xl border ${borderClass} shadow-lg`}>
       </div> {/* END main footer content */}
 
 
-        {/* Newsletter Section */}
-        <div className="mb-20 relative">
+  {/* Newsletter Section */}
+<section className="relative mb-20 px-4 sm:px-6">
 
-          {/* this pop message continer  */}
+  {/* Soft Gradient Glow */}
+  <div className="absolute inset-0 bg-gradient-to-r 
+    from-amber-400/10 via-orange-400/10 to-amber-500/10 
+    blur-3xl rounded-3xl pointer-events-none"></div>
 
-{/* Success Message */}
-
-  {/* Soft Gradient Background */}
-  <div className="absolute inset-0 bg-gradient-to-r from-amber-400/10 via-orange-400/10 to-amber-500/10 blur-3xl rounded-3xl"></div>
-
-<div
-  className={`relative max-w-3xl mx-auto px-10 py-14 rounded-3xl
-  shadow-xl border ${borderClass}
-
-  dark:bg-slate-500/10
-  dark:from-[#1f1b16]/80 dark:to-[#2a241c]/70
-  backdrop-blur-xl
-  dark:shadow-[0_0_40px_rgba(251,191,36,0.08)]`}
->
+  <div
+    className={`relative max-w-3xl mx-auto
+    px-6 sm:px-10
+    py-10 sm:py-14
+    rounded-2xl sm:rounded-3xl
+    shadow-lg sm:shadow-xl
+    border ${borderClass}
+    backdrop-blur-2xl
+    transition-all duration-500
+    lg:hover:shadow-2xl`}
+  >
 
     {/* Heading */}
-    <div className="text-center mb-10">
-      <h3 className={`text-2xl md:text-4xl font-extrabold ${headingClass} mb-3`}>
+    <div className="text-center mb-8 sm:mb-10">
+      <h3 className={`text-xl sm:text-3xl md:text-4xl font-extrabold ${headingClass} mb-3`}>
         ☕ Join Our Coffee Community
       </h3>
-      <p className={`text-sm ${textClass}`}>
+      <p className={`text-sm sm:text-base ${textClass} opacity-80`}>
         Be the first to know about new brews, exclusive offers & special events.
       </p>
     </div>
 
-    {/* Form */}
-{/* Form Wrapper */}
-<div className="max-w-xl mx-auto w-full">
+    {/* Form Wrapper */}
+    <div className="max-w-xl mx-auto w-full">
 
-  {/* Row */}
-  <div className="flex flex-col md:flex-row items-center gap-4">
+      {/* Input + Button Row */}
+      <div className="flex flex-col md:flex-row gap-4 w-full">
 
-    <input
-      type="email"
-      value={email}
-      onChange={(e) => {
-        setEmail(e.target.value);
-        setError("");
-      }}
-      placeholder="Enter your email address"
-      className={`flex-1 h-[56px] px-6 rounded-full
-      ${inputBgClass}
-      border ${error ? "border-red-500" : borderClass}
-      focus:outline-none focus:ring-2
-      ${error ? "focus:ring-red-500" : "focus:ring-amber-500"}
-      transition-all duration-300`}
-    />
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            setError("");
+          }}
+          placeholder="Enter your email address"
+          className={`w-full md:flex-1
+          h-[52px] sm:h-[56px]
+          px-6 rounded-full
+          ${inputBgClass}
+          border ${error ? "border-red-500" : borderClass}
+          focus:outline-none focus:ring-2
+          ${error ? "focus:ring-red-500" : "focus:ring-amber-500"}
+          transition-all duration-300`}
+        />
 
-    <button
-      onClick={handleSubscribe}
-      className="w-full md:w-auto h-[56px] px-8 rounded-full
-      bg-gradient-to-r from-amber-500 to-orange-500
-      hover:from-amber-600 hover:to-orange-600
-      text-white font-semibold
-      transition-all duration-300
-      hover:-translate-y-1 hover:scale-105
-      whitespace-nowrap cursor-pointer"
-    >
-      Subscribe Now →
-    </button>
+        <button
+          onClick={handleSubscribe}
+          className="w-full md:w-auto
+          h-[52px] sm:h-[56px]
+          px-8 rounded-full
+          bg-gradient-to-r from-amber-500 to-orange-500
+          hover:from-amber-600 hover:to-orange-600
+          text-white font-semibold
+          transition-all duration-300
+          md:hover:-translate-y-1 md:hover:scale-105
+          active:scale-95 focus:ring-amber-500 focus:ring-offset-2
+"
+        >
+          Subscribe Now →
+        </button>
 
-    
+      </div>
 
-  </div>
+      {/* Error Message */}
+      {error && (
+        <p className="text-red-500 text-sm mt-3 text-center md:text-left">
+          {error}
+        </p>
+      )}
 
-  {/* Error BELOW row (not inside flex row) */}
-  {error && (
-    <p className="text-red-500 text-sm mt-2 ml-4">
-      {error}
-    </p>
-  )}
+      {/* Success Message */}
+      {success && (
+        <div className="mt-5 flex items-center justify-center gap-3
+          bg-green-500/10 dark:bg-green-900/30
+          border border-green-400/20
+          text-green-700 dark:text-green-300
+          px-5 py-3 rounded-full
+          animate-fadeIn w-full sm:w-auto mx-auto">
 
-  {/* email successfull message  */}
-  {success && (
-  <div className="mt-4 w-[40%] flex justify-center mx-auto my-4  items-center gap-3 bg-green-100/10 dark:bg-green-900/40 
-  border border-green-400/10 text-green-700 dark:text-green-300/50 
-  px-4 py-3 rounded-lg animate-fadeIn">
+          <div className="w-5 h-5 flex items-center justify-center
+            bg-green-500 text-white rounded-full text-xs font-bold">
+            ✓
+          </div>
 
-    {/* Green Check Icon */}
-    <div className="w-5 h-5 flex items-center justify-center 
-    bg-green-500/50 text-white rounded-full text-sm font-bold">
-      ✓
+          <span className="text-sm font-medium">
+            Subscribed successfully!
+          </span>
+        </div>
+      )}
+
     </div>
 
-    <span className="text-sm font-medium">
-      Subscribed successfully!
-    </span>
-  </div>
-)}
-
-
-</div>
-
-    {/* Small Trust Text */}
-    <p className={`text-sm text-center mt-6 ${textClass} opacity-70`}>
+    {/* Trust Text */}
+    <p className={`text-xs sm:text-sm text-center mt-6 ${textClass} opacity-60`}>
       No spam. Unsubscribe anytime.
     </p>
 
   </div>
-</div>
+</section>
 
 
   {/* Bottom Bar */}

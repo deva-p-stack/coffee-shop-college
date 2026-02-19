@@ -10,28 +10,28 @@ import Navbar from "../components/Navbar";
       id: 1,
       name: 'Rajesh Kumar',
       role: 'Founder & Head Barista',
-      image: 'https://i.pravatar.cc/300?img=12',
+      image: "/coffee-shop-college/images/male.jpg",
       bio: '15+ years of coffee expertise'
     },
     {
       id: 2,
       name: 'Priya Sharma',
       role: 'Coffee Roaster',
-      image: 'https://i.pravatar.cc/300?img=5',
+     image: "/coffee-shop-college/images/femlae.png",
       bio: 'Passionate about bean perfection'
     },
     {
       id: 3,
       name: 'Arjun Patel',
       role: 'Master Barista',
-      image: 'https://i.pravatar.cc/300?img=13',
+      image: "/coffee-shop-college/images/male.jpg",
       bio: 'Latte art champion 2023'
     },
     {
       id: 4,
-      name: 'Ananya Singh',
+      name: 'Sakthi  Prabha',
       role: 'Customer Experience Manager',
-      image: 'https://i.pravatar.cc/300?img=9',
+      image: "/coffee-shop-college/images/femlae.png",
       bio: 'Creating memorable moments'
     }
   ];

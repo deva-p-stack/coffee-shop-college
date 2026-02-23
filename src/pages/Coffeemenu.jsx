@@ -81,7 +81,7 @@ export default function CoffeeMenu({ darkMode, setDarkMode, cart, setCart }){
       price: 170, 
       description: 'Espresso with microfoam milk', 
       ingredients: 'Espresso, Microfoam milk',
-      image: "/coffee-shop-college/images//Flat White.png"
+      image: "/coffee-shop-college/images/Flat White.png"
     },
     { 
       id: 8, 

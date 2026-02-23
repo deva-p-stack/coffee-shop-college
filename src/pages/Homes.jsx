@@ -4,9 +4,19 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState,useMemo } from "react";
 import { reviews } from "./Reviewdata";
 
+import Hero from "../components/Hero";
+
+
+
+
 
 
  export default function Home({ darkMode, setDarkMode }){
+
+// title desctition 
+  useEffect(() => {
+    document.title = "Bean Haven | Home";
+  }, []);
 
 
   // Auto Detect Open / Closed
@@ -191,8 +201,9 @@ useEffect(() => {
       });
 
       const done = updated.every((val, i) => val === stats[i].value);
-      if (done) clearInterval(interval);
-
+  if (done) {
+  clearInterval(interval);
+}
       return updated;
     });
   }, 40);
@@ -213,7 +224,7 @@ useEffect(() => {
   {/* Background Slider */}
   <div className="absolute inset-0">
     {heroImages.map((img, index) => (
-      <img    loading="lazy"
+      <img    loading="eager"
         key={index}
         src={img}
         alt="Coffee Shop"
@@ -230,20 +241,15 @@ useEffect(() => {
   {/* Content */}
   <div className="relative max-w-7xl mx-auto px-6 h-full flex items-center">
     <div className="text-white max-w-2xl space-y-6">
+{/*  */}
 
-      <h1 className="text-5xl md:text-7xl font-extrabold leading-tight">
-        Fresh Coffee.
-        <br />
-        <span className="text-amber-400">Good Vibes.</span>
-      </h1>
+<Hero />
 
-      <p className="text-lg md:text-xl text-gray-200 max-w-lg">
-        Your daily dose of happiness, brewed to perfection.
-        Experience the aroma, taste the passion.
-      </p>
 
-    <div className="flex flex-col sm:flex-row gap-4 pt-4  w-full sm:w-auto sm:justify-start">
 
+    <div className="flex flex-col sm:flex-row gap-4   w-full sm:w-auto sm:justify-start">
+
+       
         <button
           onClick={() => navigate("/menu")}
           className="bg-amber-500 hover:bg-amber-600
@@ -251,20 +257,8 @@ useEffect(() => {
                      font-semibold text-white
                      shadow-xl hover:shadow-2xl
                      transition-all duration-300
-                     hover:-translate-y-1"
-        >
-          View Menu
-        </button>
-
-        <button
-          onClick={() => navigate("/cart")}
-          className="bg-white/90 backdrop-blur
-                     text-gray-900
-                     px-8 py-3 rounded-full
-                     font-semibold
-                     shadow-xl hover:shadow-2xl
-                     transition-all duration-300
-                     hover:-translate-y-1"
+                     hover:-translate-y-1 cursor-pointer"
+       
         >
           Order Now
         </button>
@@ -276,7 +270,7 @@ useEffect(() => {
                      font-semibold
                      text-white
                      hover:bg-white/10
-                     transition-all duration-300"
+                     transition-all duration-300 cursor-pointer"
         >
           Visit Us
         </button>

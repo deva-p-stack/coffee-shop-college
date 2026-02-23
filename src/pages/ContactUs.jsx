@@ -1,7 +1,51 @@
 import { useState } from 'react';
+
 import { Moon, Sun, MapPin, Phone, Mail, Clock, Send, User, MessageSquare, Facebook, Instagram, Twitter, Check } from 'lucide-react';
 
 export default function ContactUs({ darkMode, setDarkMode }) {
+
+  const [errors, setErrors] = useState({});
+
+
+  const validateForm = () => {
+  let newErrors = {};
+
+  // Name
+  if (!formData.name.trim()) {
+    newErrors.name = "Name is required";
+  }
+
+  // Email
+  if (!formData.email.trim()) {
+    newErrors.email = "Email is required";
+  } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+    newErrors.email = "Enter a valid email address";
+  }
+
+ const phone = formData.phone.trim();
+ if (phone === "") {
+    newErrors.phone = "Phone number is required";
+  } 
+  else if (!/^[0-9+\-\s]{10,15}$/.test(phone)) {
+    newErrors.phone = "Enter a valid phone number";
+  }
+
+  // Subject
+  if (!formData.subject.trim()) {
+    newErrors.subject = "Subject is required";
+  }
+
+  // Message
+  if (!formData.message.trim()) {
+    newErrors.message = "Message is required";
+  } else if (formData.message.length < 10) {
+    newErrors.message = "Message must be at least 10 characters";
+  }
+
+  setErrors(newErrors);
+
+  return Object.keys(newErrors).length === 0;
+};
   
   const [formData, setFormData] = useState({
     name: '',
@@ -20,21 +64,31 @@ export default function ContactUs({ darkMode, setDarkMode }) {
     }));
   };
 
-  const handleSubmit = () => {
-    if (formData.name && formData.email && formData.subject && formData.message) {
-      setIsSubmitted(true);
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          subject: '',
-          message: ''
-        });
-      }, 3000);
-    }
-  };
+const handleSubmit = (e) => {
+  e.preventDefault();
+
+  if (validateForm()) {
+    console.log("Form Submitted:", formData);
+    // your toast or success logic here
+  }
+};
+
+
+  // const handleSubmit = () => {
+  //   if (formData.name && formData.email && formData.subject && formData.message) {
+  //     setIsSubmitted(true);
+  //     setTimeout(() => {
+  //       setIsSubmitted(false);
+  //       setFormData({
+  //         name: '',
+  //         email: '',
+  //         phone: '',
+  //         subject: '',
+  //         message: ''
+  //       });
+  //     }, 3000);
+  //   }
+  // };
 
   const bgClass = darkMode ? 'bg-gray-900' : 'bg-amber-50';
   const cardClass = darkMode ? 'bg-gray-800' : 'bg-white';
@@ -117,11 +171,12 @@ export default function ContactUs({ darkMode, setDarkMode }) {
                 </div>
                 <h2 className={`text-xl font-bold ${textClass}`}>Email Us</h2>
               </div>
-              <a href="mailto:hello@coffeeshop.com" className={`${subTextClass} hover:${darkMode ? 'text-amber-500' : 'text-amber-600'} transition-colors block mb-2`}>
-                hello@coffeeshop.com
+              <a href="mailto:hello@beanhaven.com" className={`${subTextClass} hover:${darkMode ? 'text-amber-500' : 'text-amber-600'} transition-colors block mb-2`}>
+                hello@beanhaven.com
               </a>
-              <a href="mailto:support@coffeeshop.com" className={`${subTextClass} hover:${darkMode ? 'text-amber-500' : 'text-amber-600'} transition-colors block`}>
-                support@coffeeshop.com
+              <a href="mailto:support@beanhaven.com" className={`${subTextClass} hover:${darkMode ? 'text-amber-500' : 'text-amber-600'} transition-colors block`}>
+                
+                  support@beanhaven.com
               </a>
             </div>
 
@@ -203,89 +258,137 @@ export default function ContactUs({ darkMode, setDarkMode }) {
                 <div className="space-y-5">
                   <div className="grid md:grid-cols-2 gap-5">
                     <div>
-                      <label className={`block text-sm font-medium ${textClass} mb-2`}>
-                        Your Name *
-                      </label>
-                      <div className="relative">
-                        <User className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 ${subTextClass}`} />
-                        <input
-                          type="text"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleInputChange}
-                          placeholder="John Doe"
-                          className={`w-full pl-12 pr-4 py-3 border rounded-lg ${inputClass} focus:outline-none focus:ring-2 focus:ring-amber-500`}
-                        />
-                      </div>
-                    </div>
+                      <div>
+  <label className={`block text-sm font-medium ${textClass} mb-2`}>
+    Your Name *
+  </label>
+
+  <div className="relative">
+    <User className={`absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 ${subTextClass}`} />
+
+    <input
+      type="text"
+      name="name"
+      value={formData.name}
+      onChange={handleInputChange}
+      placeholder="John Doe"
+      className={`w-full pl-12 pr-4 py-3 border rounded-lg
+      ${errors.name ? 'border-red-500 focus:ring-red-500' : inputClass}
+      focus:outline-none focus:ring-2`}
+    />
+  </div>
+
+  {errors.name && (
+    <p className="text-red-500 text-sm mt-1 py-1">{errors.name}</p>
+  )}
+</div>
 
                     <div>
-                      <label className={`block text-sm font-medium ${textClass} mb-2`}>
-                        Email Address *
-                      </label>
-                      <div className="relative">
-                        <Mail className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 ${subTextClass}`} />
-                        <input
-                          type="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          placeholder="john@example.com"
-                          className={`w-full pl-12 pr-4 py-3 border rounded-lg ${inputClass} focus:outline-none focus:ring-2 focus:ring-amber-500`}
-                        />
-                      </div>
+  <label className={`block text-sm font-medium ${textClass} mb-2`}>
+    Email Address *
+  </label>
+
+  <div className="relative">
+    <Mail className={`absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 ${subTextClass}`} />
+
+    <input
+      type="email"
+      name="email"
+      value={formData.email}
+      onChange={handleInputChange}
+      placeholder="example@gmail.com"
+      className={`w-full pl-12 pr-4 py-3 border rounded-lg
+      ${errors.email ? 'border-red-500 focus:ring-red-500' : inputClass}
+      focus:outline-none focus:ring-2`}
+    />
+  </div>
+
+  {errors.email && (
+    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+  )}
+</div>
+
                     </div>
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-5">
-                    <div>
-                      <label className={`block text-sm font-medium ${textClass} mb-2`}>
-                        Phone Number
-                      </label>
-                      <div className="relative">
-                        <Phone className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 ${subTextClass}`} />
-                        <input
-                          type="tel"
-                          name="phone"
-                          value={formData.phone}
-                          onChange={handleInputChange}
-                          placeholder="+91 98765 43210"
-                          className={`w-full pl-12 pr-4 py-3 border rounded-lg ${inputClass} focus:outline-none focus:ring-2 focus:ring-amber-500`}
-                        />
-                      </div>
-                    </div>
+                  <div>
+  <label className={`block text-sm font-medium ${textClass} mb-2`}>
+    Phone Number
+  </label>
 
-                    <div>
-                      <label className={`block text-sm font-medium ${textClass} mb-2`}>
-                        Subject *
-                      </label>
-                      <div className="relative">
-                        <MessageSquare className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 ${subTextClass}`} />
-                        <input
-                          type="text"
-                          name="subject"
-                          value={formData.subject}
-                          onChange={handleInputChange}
-                          placeholder="How can we help?"
-                          className={`w-full pl-12 pr-4 py-3 border rounded-lg ${inputClass} focus:outline-none focus:ring-2 focus:ring-amber-500`}
-                        />
-                      </div>
-                    </div>
-                  </div>
+  <div className="relative">
+    <Phone className={`absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 ${subTextClass}`} />
+
+    <input
+      type="tel"
+      name="phone"
+      value={formData.phone}
+      onChange={handleInputChange}
+      placeholder="+91 98765 43210"
+      className={`w-full pl-12 pr-4 py-3 border rounded-lg
+      ${errors.phone ? 'border-red-500 focus:ring-red-500' : inputClass}
+      focus:outline-none focus:ring-2`}
+    />
+  </div>
+
+  {errors.phone && (
+    <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+  )}
+</div>
+
+                   
+<div>
+  <label className={`block text-sm font-medium ${textClass} mb-2`}>
+    Subject *
+  </label>
+
+  <div className="relative">
+    <MessageSquare
+      className={`absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 ${subTextClass}`}
+    />
+
+    <input
+      type="text"
+      name="subject"
+      value={formData.subject}
+      onChange={handleInputChange}
+      placeholder="How can we help?"
+      className={`w-full pl-12 pr-4 py-3 border rounded-lg
+      ${errors.subject ? 'border-red-500 focus:ring-red-500' : inputClass}
+      focus:outline-none focus:ring-2`}
+    />
+  </div>
+
+  {errors.subject && (
+    <p className="text-red-500 text-sm mt-1">
+      {errors.subject}
+    </p>
+  )}
+</div>
+
+
+</div>
+                     
 
                   <div>
                     <label className={`block text-sm font-medium ${textClass} mb-2`}>
                       Your Message *
                     </label>
-                    <textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      rows="6"
-                      placeholder="Tell us what's on your mind..."
-                      className={`w-full px-4 py-3 border rounded-lg ${inputClass} focus:outline-none focus:ring-2 focus:ring-amber-500 resize-none`}
-                    />
-                  </div>
+                   <textarea
+                              name="message"
+                              value={formData.message}
+                              onChange={handleInputChange}
+                              rows="6"
+                              placeholder="Tell us what's on your mind..."
+                              className={`w-full px-4 py-3 border rounded-lg 
+                              ${errors.message ? 'border-red-500 focus:ring-red-500' : inputClass}
+                              focus:outline-none focus:ring-2 resize-none`}
+                            />
+                            {errors.message && (
+                              <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+                            )}
+                                              </div>
 
                   <button
                     onClick={handleSubmit}

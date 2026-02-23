@@ -16,7 +16,7 @@ export default function Reviews({ darkMode, setDarkMode }) {
     {
       id: 1,
       name: 'Priya Sharma',
-      avatar: 'https://i.pravatar.cc/150?img=1',
+      avatar: "/coffee-shop-college/images/priya.jpg",
       rating: 5,
       date: '2024-01-28',
       review: 'Absolutely love this place! The Caramel Macchiato is to die for. The ambiance is cozy and perfect for working. Staff is super friendly and the Wi-Fi is fast. Will definitely come back!',
@@ -101,7 +101,7 @@ export default function Reviews({ darkMode, setDarkMode }) {
       id: 8,
       name: 'Siddharth Jain',
       avatar: 'https://i.pravatar.cc/150?img=15',
-      rating: 2,
+      rating: 4,
       date: '2024-01-20',
       review: 'Expected better based on reviews. Coffee was average and overpriced. Service was slow and they got my order wrong twice. The place looks nice but needs improvement on execution.',
       helpful: 16,

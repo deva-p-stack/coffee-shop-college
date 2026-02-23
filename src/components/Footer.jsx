@@ -154,8 +154,8 @@ if (day >= 1 && day <= 5) {
               <li className="flex items-start gap-3">
                 <MapPin className={`w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5`} />
                 <div>
-                  <p className={textClass}>123 Coffee Street, Bean City</p>
-                  <p className={textClass}>Tamil Nadu, India - 632014</p>
+                 <p className={textClass}>No. 24, Anna Salai</p>
+                <p className={textClass}>Teynampet, Chennai, Tamil Nadu - 600018, India</p>
                 </div>
               </li>
               <li className="flex items-center gap-3">
@@ -172,11 +172,11 @@ if (day >= 1 && day <= 5) {
               <li className="flex items-center gap-3">
                 <Mail className={`w-5 h-5 text-amber-500 flex-shrink-0`} />
                 <div>
-                  <a href="mailto:hello@coffeeshop.com" className={`${textClass} ${linkHoverClass} transition-colors block`}>
-                    hello@coffeeshop.com
+                  <a href="mailto:hello@BeanHaven.com" className={`${textClass} ${linkHoverClass} transition-colors block`}>
+                    hello@BeanHaven.com
                   </a>
-                  <a href="mailto:support@coffeeshop.com" className={`${textClass} ${linkHoverClass} transition-colors block`}>
-                    support@coffeeshop.com
+                  <a href="mailto:support@BeanHaven.com" className={`${textClass} ${linkHoverClass} transition-colors block`}>
+                    support@BeanHaven.com
                   </a>
                 </div>
               </li>

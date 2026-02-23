@@ -2,9 +2,22 @@ import { useState, useEffect } from 'react';
 
 import { Plus, Minus, MapPin, Sun, Moon , Home, Briefcase, Edit2, Trash2, X } from 'lucide-react';
 
+
 export default function Cart({ darkMode, setDarkMode, cart, setCart }){
 
- 
+  // orderfully toast state 
+ const [showToast, setShowToast] = useState(false);
+
+
+//  unalbe to retrive location error message state
+const [showLocationToast, setShowLocationToast] = useState(false);
+
+
+
+//  error message for lcoation state 
+const [showErrorToast, setShowErrorToast] = useState(false);
+
+
  const [addresses, setAddresses] = useState(() => {
   const savedAddresses = localStorage.getItem('addresses');
   return savedAddresses
@@ -159,7 +172,8 @@ const handleClearCart = () => {
           alert(`Location captured! Lat: ${position.coords.latitude.toFixed(4)}, Lng: ${position.coords.longitude.toFixed(4)}`);
         },
         (error) => {
-          alert('Unable to retrieve location. Please enable location services.');
+        setShowErrorToast(true);
+        setTimeout(() => setShowErrorToast(false), 3000);
           console.error('Location error:', error);
         }
       );
@@ -188,10 +202,12 @@ const handleOrderNow = () => {
           total: calculateGrandTotal()
         });
 
-        alert("Order placed successfully!");
+setShowToast(true);
+setTimeout(() => setShowToast(false), 3000);
       },
       (error) => {
-        alert('Unable to retrieve location.');
+        setShowLocationToast(true);
+setTimeout(() => setShowLocationToast(false), 3000);
         console.error(error);
       }
     );
@@ -412,6 +428,99 @@ const handleOrderNow = () => {
             </button>
           </div>
 
+
+
+          {/* order succesfully toast page   */}
+
+{showToast && (
+  <div className="fixed top-6 right-6 z-50 animate-slideIn">
+    <div className="flex items-center gap-4 bg-white shadow-xl rounded-lg px-5 py-4 min-w-[280px] border border-gray-200">
+      
+      {/* Left Success Icon */}
+      <div className="bg-green-100 p-2 rounded-full">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6 text-green-600"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+
+      {/* Message */}
+      <p className="text-gray-800 font-medium">
+        Order placed successfully!
+      </p>
+    </div>
+  </div>
+)}
+
+{/* toast for showing the location error  */}
+
+{showErrorToast && (
+  <div className="fixed top-6 right-6 z-50 animate-slideIn">
+    <div className="flex items-center gap-4 bg-white shadow-xl rounded-lg px-5 py-4 min-w-[300px] border border-gray-200">
+      
+      {/* Left Error Icon */}
+      <div className="bg-red-100 p-2 rounded-full">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6 text-red-600"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M12 9v2m0 4h.01M12 3a9 9 0 100 18 9 9 0 000-18z"
+          />
+        </svg>
+      </div>
+
+      {/* Text Content */}
+      <div>
+        <p className="text-gray-800 font-semibold">
+          Location Access Failed
+        </p>
+        <p className="text-sm text-gray-500">
+          Please enable location services.
+        </p>
+      </div>
+
+    </div>
+  </div>
+)}
+
+
+{/* toast error unable to retrive the  location  */}
+
+{showLocationToast && (
+  <div className="fixed top-6 right-6 z-50 animate-slideIn">
+    <div className="flex items-center gap-4 bg-white shadow-xl rounded-lg px-5 py-4 min-w-[280px] border border-gray-200">
+      
+      {/* Left SVG Icon */}
+      <div className="bg-red-100 p-2 rounded-full">
+       
+
+
+        <svg xmlns="http://www.w3.org/2000/svg"  className="h-6 w-6 text-red-600"   viewBox="0 0 24 24"><g fill="none"><path d="M20 10c0 6.5-8 12-8 12s-8-5.5-8-12a8 8 0 1 1 16 0"/><path stroke="currentColor" stroke-linecap="square" stroke-width="2" d="M20 10c0 6.5-8 12-8 12s-8-5.5-8-12a8 8 0 1 1 16 0ZM9.879 8.379L12 10.5m0 0l2.121 2.121m-2.12-2.12l2.12-2.122m-2.12 2.121l-2.122 2.121"/></g></svg>
+      </div>
+
+      {/* Text Content */}
+      <p className="text-gray-800 font-medium"> Unable to retrieve location.</p>
+
+    </div>
+  </div>
+)}
+
+
+
+{/* address section  */}
           {showAddressForm && (
             <form onSubmit={handleAddressSubmit} className={`mb-6 p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-gray-50'}`}>
               <div className="mb-4">
